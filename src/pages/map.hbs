@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  {{> head }}
+  
+  <title>Amrita Trees: map</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/map.css">
+  <link rel="stylesheet" href="./css/sidebar.css">
+  <link rel="stylesheet" href="./css/switch.css">
+  
+  <script src="./js/app.js" defer></script>
+  <script src="./js/map.js" defer></script>
+  <script src="./js/sidebar.js" defer></script>
+  
+<style>
+
+#mapContainer{
+  height:100%;
+  overflow:hidden;
+}
+  
+#map{
+  height:calc(100% + 23px);
+}  
+
+  
+.gm-style-iw-d{
+  color:black;    
+}
+</style>
+  
+</head>
+<body id="body">
+  <div id="container">
+    
+    <div id="overlay" onclick="clickedOverlay()"></div>
+    <div class="icon iconContainer noSelect" style="left:5px;border-radius:15px;" onclick="toggleSidebar()"><i class="fas fa-list-ul"></i></div>    
+    <div class="icon iconContainer noSelect" style="right:5px;border-radius:15px;"><a href="/inventory"><i class="fas fa-backpack"></i></a></div>    
+
+    <div id="mapContainer">
+      <div id="map"></div>
+    </div>
+
+    {{> sidebar }}
+    
+    <div id="dev"></div>
+
+  </div>
+</body>
+<script>
+function initMap() {
+  
+  let map = new google.maps.Map(document.getElementById("map"),
+    {
+      center: { lat: 10.900016808568687, lng: 76.9028589289025 },
+      zoom: 20,
+      // heading:
+      // tilt:
+      mapId: "661dd2cc98d8e9e2",
+      mapTypeId: 'satellite',
+    }
+  );
+  
+  map.setOptions({
+    // draggable: false, 
+    zoomControl: false, 
+    // scrollwheel: false, 
+    disableDoubleClickZoom: true,
+    disableDefaultUI: true,
+  });
+
+  const treePoints = [
+    ["Center", 10.900016808568687, 76.9028589289025, 80],
+    ["Banyan Tree",10.899701,76.903252, 80],
+    ["Ficus Elastica",10.899759,76.903345, 80],
+    ["Weeping Fig",10.899498,76.903237,80],
+    // ["Scared Fig",10.899663,76.907571,80] INCORRECT COORDS
+    ["Ficus Microcarpa",10.900323,76.902236,80],
+    ["Neem Tree",10.901405,76.902026,80],
+    ["Rubber Fig",10.902403,76.901394,80],
+    ["Cannon-ball tree",10.902318,76.901079,80]
+  ];
+  for(let i=0; i<treePoints.length ;i++){
+    const tree =  treePoints[i]; 
+    const marker = new google.maps.Marker({
+      title: tree[0],position: { lat: tree[1], lng: tree[2] },map,
+      icon: {
+        url: tree_icon_url,
+        scaledSize: new google.maps.Size(tree[3], tree[3]),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(tree[3]/2, tree[3]/2),
+      },
+      animation:google.maps.Animation.DROP
+    });
+    
+    const infowindow = new google.maps.InfoWindow({
+      content: tree[0],
+    });
+    
+    marker.addListener("click", () => {
+      if (infowindow) {infowindow.close();}
+      infowindow.open({
+        anchor: marker,
+        map,
+        shouldFocus: false,
+      });
+    });
+    
+    marker.setMap(map);
+    
+//     const infowindow = new google.maps.InfoWindow({
+//       content: tree[0]
+//     });
+
+  }
+  
+  const loop = () => {
+    if(navigator.geolocation){navigator.geolocation.getCurrentPosition( (position)=>{
+      const pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      };
+      map.setCenter(pos);
+      const latlng = new google.maps.LatLng(pos.lat, pos.lng);
+      currPosMarker.setPosition(latlng);
+    });
+    }
+  }
+  
+  const currPosMarker = new google.maps.Marker({
+    position: { lat: 10.900016808568687, lng: 76.9028589289025 },map,
+    icon:"https://cdn.glitch.global/9d67ff5c-524b-467b-aa2f-2cb422728542/currPosMarker.png?v=1661892594255"
+  });
+
+  
+  // setInterval(loop,1000);
+}
+  
+  
+const tree_icon_url = "https://cdn.glitch.global/9d67ff5c-524b-467b-aa2f-2cb422728542/treeicon.32png.png?v=1662405399801";
+window.initMap = initMap;
+</script>
+
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key=API_KEY&callback=initMap">
+</script>
+  
+</html>
