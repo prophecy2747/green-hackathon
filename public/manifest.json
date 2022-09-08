@@ -1,0 +1,32 @@
+{
+    "theme_color": "#91b51d",
+    "background_color": "#302b3f",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "start_url": "/",
+    "short_name": "atrees",
+    "name": "amrita trees app",
+    "icons": [
+        {
+            "src": "https://cdn.glitch.global/9d67ff5c-524b-467b-aa2f-2cb422728542/icon-192x192.png?v=1661607334773",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://cdn.glitch.global/9d67ff5c-524b-467b-aa2f-2cb422728542/icon-256x256.png?v=1661607334773",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "https://cdn.glitch.global/9d67ff5c-524b-467b-aa2f-2cb422728542/icon-384x384.png?v=1661607335037",
+            "sizes": "384x384",
+            "type": "image/png"
+        },
+        {
+            "src": "https://cdn.glitch.global/9d67ff5c-524b-467b-aa2f-2cb422728542/icon-512x512.png?v=1661607335077",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
