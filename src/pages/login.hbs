@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  {{> head }}
+  <title>Amrita Trees: Login</title>
+  
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: #302b3f;
+    color: #91b51d;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin-block: 8px;
+}
+
+form {
+    background-color: rgba(0,0,0,0.5);
+    max-width: 360px;
+    width: 100%;
+    padding: 48px 32px;
+    border: 1px solid #e1e2f0;
+    border-radius: 4px;
+    box-shadow: 0 0 5px 0 rgba(42, 45, 48, 0.12);
+    transition: all 0.3s ease;
+    padding-bottom:28px;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.row label {
+    font-size: 13px;
+    color: #8086a9;
+    margin-inline:15px;
+}
+
+.row input {
+    flex: 1;
+    padding: 13px;
+    margin-inline:15px;
+    background-color:#302b3f;
+    border: 1px solid #d6d8e6;
+    color:white;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: all 0.2s ease-out;
+}
+
+.row input:focus {
+    outline: none;
+    box-shadow: inset 2px 2px 5px 0 rgba(42, 45, 48, 0.12);
+}
+
+.row input::placeholder {
+    color: rgba(255,255,255,0.4);
+}
+
+button {
+    width: calc(100% - 30px);
+    padding: 12px;
+    margin-inline:15px;
+    font-size: 18px;
+    background: #15C39A;
+    color: #fff;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+    margin-top: 15px;
+    transition: background 0.2s ease-out;
+}
+
+button:hover {
+    background: #55D3AC;
+}
+
+@media(max-width: 458px) {
+
+    body {
+        margin: 0 18px;
+    }
+
+    form {
+        border: none;
+        box-shadow: none;
+        padding: 15px 0;
+    }
+
+}
+  
+  
+#popup{
+  position:fixed;
+  height:5rem;
+  width:min(350px,90%);
+  background-color:rgba(255,255,255,0.8);
+  border-radius:15px;
+  display:none;
+  grid-template-columns:auto 5rem;
+  top:5px;
+  right:15px;
+  animation:enter .5s ;
+}
+
+#popup > div:last-child{position:relative;cursor:pointer;}
+  
+#popup > div:last-child:before,#popup > div:last-child:after{
+  content:"";
+  position:absolute;
+  height:70%;
+  border-radius:50px;
+  width:5px;
+  background-color:#999;
+  top:50%;left:50%;
+  transform: translate(-50%,-50%) rotate(45deg);
+}
+#popup > div:last-child:after{
+   transform: translate(-50%,-50%) rotate(-45deg);
+}  
+@keyframes enter{
+  from{
+    right:-500px;
+  }
+  to{
+    right:0;
+  }
+}
+</style>
+</head>
+<body>
+
+    <div id="popup" style="display:{{ display }}">
+      <div> {{msg}} </div>
+      <div onclick="document.getElementById('popup').remove()"></div>
+    </div>
+  
+    <h1>Login</h1>
+    <form action="/login" method="post">
+        <div class="row">
+            <label for="username">Username</label>
+            <input type="text" name="userdata" autocomplete="off" placeholder="John Doe">
+        </div>
+        <div class="row" style="margin-bottom:10px;">
+            <label for="password">Password</label>
+            <input type="password" name="password">
+        </div>
+        <span style="display:inline-block;width:100%;color:#b42d20;text-align:center;height:1.2rem;">{{ err }}</span>
+        <button type="submit">Login</button>
+        <a href="/signup" style="display:block;text-align:center;padding-top:10px;">Don't have an account? Create one now!</a>
+    </form>
+</body>
+
+</html>
+
