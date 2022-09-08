@@ -1,0 +1,76 @@
+/* SWITCH */
+
+.switch {
+  
+  --transitionSpeed: .1s;
+/*   --switchWidth: 60px; */
+/*   --switchHeight: 34px; */
+/*   --knobGap: 4px; */
+  --switchWidth: 50px;
+  --switchHeight: 28px;
+  --knobGap: 3px;
+  
+  --switchColor: #cccccc;
+  --knobColor: white;
+  --shadeColor: #f9c04d;
+  
+  position: relative;
+  display: inline-block;
+  width: var(--switchWidth);
+  height: var(--switchHeight);
+  
+  margin-right:5px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--switchColor);
+  -webkit-transition: var(--transitionSpeed);
+  transition: var(--transitionSpeed);
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: calc( var(--switchHeight) - var(--knobGap) - var(--knobGap) );
+  width: calc( var(--switchHeight) - var(--knobGap) - var(--knobGap) );
+  left: var(--knobGap);
+  bottom: var(--knobGap);
+  background-color: var(--knobColor);
+  -webkit-transition: var(--transitionSpeed);
+  transition: var(--transitionSpeed);
+}
+
+input:checked + .slider {
+  background-color: var(--shadeColor);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--shadeColor);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(calc( var(--switchHeight) - var(--knobGap) - var(--knobGap) ));
+  -ms-transform: translateX(calc( var(--switchHeight) - var(--knobGap) - var(--knobGap) ));
+  transform: translateX(calc( var(--switchHeight) - var(--knobGap) - var(--knobGap) ));
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: var(--switchHeight);
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
